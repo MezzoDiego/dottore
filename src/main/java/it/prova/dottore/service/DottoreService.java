@@ -14,4 +14,6 @@ public interface DottoreService {
 	public Dottore inserisciNuovo(Dottore dottoreInstance);
 
 	public void rimuovi(Long idToRemove);
+	
+	public Dottore caricaPerCF(String CF);
 }

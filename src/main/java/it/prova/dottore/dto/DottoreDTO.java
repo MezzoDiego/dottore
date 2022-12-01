@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -20,7 +21,7 @@ public class DottoreDTO {
 	@NotBlank(message = "{codicedottore.notblank}")
 	private String codiceDottore;
 	private String codiceFiscalePazienteAttualmenteInVisita;
-	private Boolean InServizio;
+	private Boolean inServizio;
 	private Boolean inVisita;
 
 	public DottoreDTO() {
@@ -35,7 +36,7 @@ public class DottoreDTO {
 		this.cognome = cognome;
 		this.codiceDottore = codiceDottore;
 		this.codiceFiscalePazienteAttualmenteInVisita = codiceFiscalePazienteAttualmenteInVisita;
-		InServizio = inServizio;
+		this.inServizio = inServizio;
 		this.inVisita = inVisita;
 	}
 
@@ -80,11 +81,11 @@ public class DottoreDTO {
 	}
 
 	public Boolean getInServizio() {
-		return InServizio;
+		return inServizio;
 	}
 
 	public void setInServizio(Boolean inServizio) {
-		InServizio = inServizio;
+		this.inServizio = inServizio;
 	}
 
 	public Boolean getInVisita() {
@@ -97,7 +98,7 @@ public class DottoreDTO {
 
 	public Dottore buildDottoreModel() {
 		return new Dottore(this.id, this.nome, this.cognome, this.codiceDottore,
-				this.codiceFiscalePazienteAttualmenteInVisita, this.InServizio, this.inVisita);
+				this.codiceFiscalePazienteAttualmenteInVisita, this.inServizio, this.inVisita);
 	}
 
 	public static DottoreDTO buildDottoreDTOFromModel(Dottore input) {
