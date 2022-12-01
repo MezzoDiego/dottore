@@ -3,6 +3,8 @@ package it.prova.dottore.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import it.prova.dottore.model.Dottore;
@@ -11,8 +13,11 @@ import it.prova.dottore.model.Dottore;
 public class DottoreDTO {
 
 	private Long id;
+	@NotBlank(message = "{nome.notblank}")
 	private String nome;
+	@NotBlank(message = "{cognome.notblank}")
 	private String cognome;
+	@NotBlank(message = "{codicedottore.notblank}")
 	private String codiceDottore;
 	private String codiceFiscalePazienteAttualmenteInVisita;
 	private Boolean InServizio;

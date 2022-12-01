@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.dottore.model.Dottore;
 import it.prova.dottore.repository.DottoreRepository;
+import it.prova.dottore.web.api.exceptions.IdNotNullForInsertException;
 
 @Service
 @Transactional(readOnly = true)
@@ -18,14 +19,12 @@ public class DottoreServiceImpl implements DottoreService {
 
 	@Override
 	public List<Dottore> listAllDottori() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Dottore>) repository.findAll();
 	}
 
 	@Override
 	public Dottore caricaSingoloDottore(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(id).orElse(null);
 	}
 
 	@Override
@@ -38,8 +37,10 @@ public class DottoreServiceImpl implements DottoreService {
 	@Override
 	@Transactional
 	public Dottore inserisciNuovo(Dottore dottoreInstance) {
-		// TODO Auto-generated method stub
-		return null;
+		if(dottoreInstance.getId() != null)
+			throw new IdNotNullForInsertException("Non è ammesso fornire un id per la creazione");
+		
+		return repository.save(dottoreInstance);
 	}
 
 	@Override
