@@ -81,6 +81,7 @@ public class DottoreServiceImpl implements DottoreService {
 	@Transactional
 	public void impostaPazienteInVisita(Dottore dottore, String CF) {
 		dottore.setCodiceFiscalePazienteAttualmenteInVisita(CF);
+		dottore.setInVisita(true);
 		repository.save(dottore);
 		
 	}

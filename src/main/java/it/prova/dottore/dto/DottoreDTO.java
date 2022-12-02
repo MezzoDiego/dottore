@@ -21,7 +21,9 @@ public class DottoreDTO {
 	@NotBlank(message = "{codicedottore.notblank}")
 	private String codiceDottore;
 	private String codiceFiscalePazienteAttualmenteInVisita;
+	@NotNull(message = "{inServizio.notnull}")
 	private Boolean inServizio;
+	@NotNull(message = "{inVisita.notnull}")
 	private Boolean inVisita;
 
 	public DottoreDTO() {

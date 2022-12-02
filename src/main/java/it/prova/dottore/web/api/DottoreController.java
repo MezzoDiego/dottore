@@ -98,12 +98,14 @@ public class DottoreController {
 	}
 	
 	@PostMapping("/impostaInVisita")
-	public void impostaInVisita(@Valid @RequestBody DottorePazienteDTO dottorePaziente) {
+	public DottorePazienteDTO impostaInVisita(@Valid @RequestBody DottorePazienteDTO dottorePaziente) {
 		Dottore dottoreReloaded = dottoreService.caricaPerCodiceDottore(dottorePaziente.getCodiceDottore());
 		if(dottoreReloaded == null)
 			throw new NotFoundException("Dottore non trovato con codice: " + dottorePaziente.getCodiceDottore());
 		
-		dottoreService.impostaPazienteInVisita(dottoreReloaded, dottorePaziente.getCodiceFiscalePazienteAttualmenteInVisita());
+		 dottoreService.impostaPazienteInVisita(dottoreReloaded, dottorePaziente.getCodiceFiscalePazienteAttualmenteInVisita());
+		 
+		 return dottorePaziente;
 		
 	}
 
