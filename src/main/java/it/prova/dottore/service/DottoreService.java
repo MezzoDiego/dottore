@@ -16,4 +16,8 @@ public interface DottoreService {
 	public void rimuovi(Long idToRemove);
 	
 	public Dottore caricaPerCF(String CF);
+	
+	public Dottore caricaPerCodiceDottore(String codiceDottore);
+	
+	public void impostaPazienteInVisita(Dottore dottore, String CF);
 }

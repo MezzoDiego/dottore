@@ -72,4 +72,17 @@ public class DottoreServiceImpl implements DottoreService {
 		return repository.findByCodiceFiscalePazienteAttualmenteInVisita(CF);
 	}
 
+	@Override
+	public Dottore caricaPerCodiceDottore(String codiceDottore) {
+		return repository.findByCodiceDottore(codiceDottore);
+	}
+
+	@Override
+	@Transactional
+	public void impostaPazienteInVisita(Dottore dottore, String CF) {
+		dottore.setCodiceFiscalePazienteAttualmenteInVisita(CF);
+		repository.save(dottore);
+		
+	}
+
 }

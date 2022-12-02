@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.dottore.dto.DottoreDTO;
+import it.prova.dottore.dto.DottorePazienteDTO;
 import it.prova.dottore.model.Dottore;
 import it.prova.dottore.service.DottoreService;
 import it.prova.dottore.web.api.exceptions.IdNotNullForInsertException;
@@ -84,6 +85,26 @@ public class DottoreController {
 		input.setId(id);
 		Dottore dottoreAggiornato = dottoreService.aggiorna(input.buildDottoreModel());
 		return DottoreDTO.buildDottoreDTOFromModel(dottoreAggiornato);
+	}
+	
+	@GetMapping("/codiceDottore/{codiceDottore}")
+	public DottoreDTO findByCodiceDottore(@PathVariable(value = "codiceDottore", required = true) String codiceDottore) {
+		Dottore dottoreTrovato = dottoreService.caricaPerCodiceDottore(codiceDottore);
+		
+		if(dottoreTrovato == null)
+			throw new NotFoundException("Dottore non trovato con codice: " + codiceDottore);
+		
+		return DottoreDTO.buildDottoreDTOFromModel(dottoreTrovato);
+	}
+	
+	@PostMapping("/impostaInVisita")
+	public void impostaInVisita(@Valid @RequestBody DottorePazienteDTO dottorePaziente) {
+		Dottore dottoreReloaded = dottoreService.caricaPerCodiceDottore(dottorePaziente.getCodiceDottore());
+		if(dottoreReloaded == null)
+			throw new NotFoundException("Dottore non trovato con codice: " + dottorePaziente.getCodiceDottore());
+		
+		dottoreService.impostaPazienteInVisita(dottoreReloaded, dottorePaziente.getCodiceFiscalePazienteAttualmenteInVisita());
+		
 	}
 
 }

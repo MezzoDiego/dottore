@@ -22,6 +22,12 @@ public class Dottore {
 		super();
 	}
 
+	public Dottore(String codiceDottore, String codiceFiscalePazienteAttualmenteInVisita) {
+		super();
+		this.codiceDottore = codiceDottore;
+		this.codiceFiscalePazienteAttualmenteInVisita = codiceFiscalePazienteAttualmenteInVisita;
+	}
+
 	public Dottore(Long id, String nome, String cognome, String codiceDottore,
 			String codiceFiscalePazienteAttualmenteInVisita, Boolean inServizio, Boolean inVisita) {
 		super();
