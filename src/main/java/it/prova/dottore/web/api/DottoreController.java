@@ -108,5 +108,15 @@ public class DottoreController {
 		 return dottorePaziente;
 		
 	}
+	
+	@PostMapping("/ricovera")
+	public DottorePazienteDTO ricovera(@Valid @RequestBody DottorePazienteDTO dottorePaziente) {
+		Dottore dottoreReloaded = dottoreService.caricaPerCodiceDottore(dottorePaziente.getCodiceDottore());
+		
+		 dottoreService.ricoveraPaziente(dottoreReloaded);
+		 
+		 return dottorePaziente;
+		
+	}
 
 }

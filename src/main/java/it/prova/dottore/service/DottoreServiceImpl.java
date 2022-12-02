@@ -83,7 +83,20 @@ public class DottoreServiceImpl implements DottoreService {
 		dottore.setCodiceFiscalePazienteAttualmenteInVisita(CF);
 		dottore.setInVisita(true);
 		repository.save(dottore);
-		
+
+	}
+
+	@Override
+	@Transactional
+	public void ricoveraPaziente(Dottore dottore) {
+		Dottore dottoreReloaded = repository.findByCodiceDottore(dottore.getCodiceDottore());
+		if (dottoreReloaded == null)
+			throw new NotFoundException("Dottore not found con codice: " + dottore.getCodiceDottore());
+
+		dottoreReloaded.setCodiceFiscalePazienteAttualmenteInVisita(null);
+		dottoreReloaded.setInVisita(false);
+		repository.save(dottoreReloaded);
+
 	}
 
 }

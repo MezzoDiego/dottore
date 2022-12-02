@@ -20,4 +20,6 @@ public interface DottoreService {
 	public Dottore caricaPerCodiceDottore(String codiceDottore);
 	
 	public void impostaPazienteInVisita(Dottore dottore, String CF);
+	
+	public void ricoveraPaziente(Dottore dottore);
 }
